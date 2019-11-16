@@ -18,7 +18,6 @@ func ladderRanking(currentLeaders []int, myScores []int) []int {
 		} else {
 			currentLeadersRanking[i] = currentLeadersRanking[i-1] + 1
 		}
-
 	}
 
 	myScoresRanking := make([]int, len(myScores))
@@ -32,12 +31,9 @@ func ladderRanking(currentLeaders []int, myScores []int) []int {
 				break
 			}
 			myScoresRanking[i] = 1
-
 		}
-
 	}
 	return myScoresRanking
-
 }
 
 func main() {
