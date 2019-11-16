@@ -4,7 +4,9 @@ import (
 	"fmt"
 )
 
-func ladderRanking(currentLeaders []int, myScores []int) []int {
+// uniqueLeaderScores receives as input the current Leaders' scores,
+// and calculates how many times each score appeares.
+func uniqueLeaderScores(currentLeaders []int) map[int]int {
 	// Find unique leaders scores
 	uniqueScores := make(map[int]int)
 
@@ -17,10 +19,17 @@ func ladderRanking(currentLeaders []int, myScores []int) []int {
 		}
 	}
 
-	fmt.Println(uniqueScores)
+	return uniqueScores
+}
 
-	// Check myScores against the unique leader scores
-	// Each of myScores' ranking number is 1 + the number of items
+// ladderRanking receives as input the current Leaders' scores, as well as my personal scores
+// and calculates my ranking in the leaderboard.
+func ladderRanking(currentLeaders []int, myScores []int) []int {
+	// Find unique leaders scores
+	uniqueScores := uniqueLeaderScores(currentLeaders)
+
+	// Check myScores against the unique leader scores.
+	// Each of myScores' ranking number equals to 1 plus the number of items
 	// ranked above it that are distinct with respect to the ranking order.
 
 	myRanking := make([]int, len(myScores))
