@@ -18,4 +18,14 @@ where currentLeaders is a slice of integers in **decreasing order** that represe
 
 ## Solution
 
+1. Master Branch
 This solution first retrieves the ranking of the current leaderbord scores, and then compares each one of MyScores to the leaderboard scores, hence the time complexity is O(n + n^2).
+
+2. Bonus1 Branch
+Some unit tests are added to ensure the functionality of the function
+
+3. Bonus2 Branch
+The function is solved using binary search for each of MyScores, thus reducing the complexity to O(n + nlogn)
+
+4. Bonus3 Branch
+The function is re-written, to cover the case where both input slices are unordered.
