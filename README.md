@@ -8,7 +8,7 @@ Marios is playing PubG and wants to climb to the top of the leaderboard. To do t
 
 The player who has the highest score gets ranked number 1 on the leaderboard.
 All the players that have equal score get the same rank number, while the next one gets the immediate following rank.
-For example, suppose that we have 4 players playing the game and their scores are 100, 80, 80, 60. These players will get ranked 1, 2, 2, 3 respectively. If Marios plays the game 3 times and gather 75, 105, 50 points, he will be ranked 3rd, 1st and 4th after each game.
+For example, suppose that we have 4 players playing the game and their scores are *100, 80, 80, 60*. These players will get ranked *1, 2, 2, 3* respectively. If Marios plays the game 3 times and gather *75, 105, 50* points, he will be ranked *3rd, 1st and 4th* after each game.
 
 ### Function Signature:
 
