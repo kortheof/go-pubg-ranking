@@ -12,20 +12,20 @@ For example, suppose that we have 4 players playing the game and their scores ar
 
 ### Function Signature:
 
-ladderRanking(currentLeaders []int, myScores []int) []int
+`ladderRanking(currentLeaders []int, myScores []int) []int`
 
 where currentLeaders is a slice of integers in **decreasing order** that represent the current leaderboard scores, myScores is also a slice of integers that represent Marios' scores in **ascending order** and finally the function returns a slice of integers that represent Marios' actual rank in the leaderboard after each game.
 
 ## Solution
 
-1. Master Branch
+1. **Master Branch:**
 This solution first retrieves the ranking of the current leaderbord scores, and then compares each one of MyScores to the leaderboard scores, hence the time complexity is O(n + n^2).
 
-2. Bonus1 Branch
+2. **Bonus1 Branch:**
 Some unit tests are added to ensure the functionality of the function
 
-3. Bonus2 Branch
-The function is solved using binary search for each of MyScores, thus reducing the complexity to O(n + nlogn)
+3. **Bonus2 Branch:**
+The problem is solved using binary search for each of MyScores, thus reducing the complexity to O(n + nlogn)
 
-4. Bonus3 Branch
+4. **Bonus3 Branch:**
 The function is re-written, to cover the case where both input slices are unordered.
