@@ -4,57 +4,84 @@ import (
 	"fmt"
 )
 
-func binarySearch(leaderScores []int, myScore int) int {
+type node struct {
+	value int
+	next  *node
+}
 
-	lowIndex := 0
-	highIndex := len(leaderScores) - 1
+var stackSize int = 0
+var stack = new(node)
 
-	median := (lowIndex + highIndex) / 2
-
-	if myScore == leaderScores[median] {
-		return median
-	} else if myScore > leaderScores[median] {
-		return 1
-	} else {
-		return 2
+func push(v int) {
+	if stack == nil {
+		stack = &node{v, nil}
+		stackSize = 1
+		// return true
 	}
+	temp := &node{v, nil}
+	temp.next = stack
+	stack = temp
+	stackSize++
+	// return true
+}
 
-	// for lowIndex <= highIndex {
-	// 	median := (lowIndex + highIndex) / 2
-	// }
+func pop() (int, bool) {
+	if stackSize == 0 {
+		return 0, false
+	}
+	if stackSize == 1 {
+		stackSize = 0
+		poppedValue := stack.value
+		stack = nil
+		return poppedValue, true
+	}
+	poppedValue := stack.value
+	stack = stack.next
+	stackSize--
+	return poppedValue, true
 }
 
 // ladderRanking receives as input the current Leaders' scores, as well as my personal scores
 // and calculates my ranking in the leaderboard.
 func ladderRanking(currentLeaders []int, myScores []int) []int {
-	// Finding the ranking of the currentLeaders
-	currentLeadersRanking := make([]int, len(currentLeaders))
-	// currentLeaders is sorted descending, first element has the highest ranking
-	currentLeadersRanking[0] = 1
-	for i := 1; i < len(currentLeadersRanking); i++ {
-		if currentLeaders[i] == currentLeaders[i-1] {
-			currentLeadersRanking[i] = currentLeadersRanking[i-1]
-		} else {
-			currentLeadersRanking[i] = currentLeadersRanking[i-1] + 1
+	// currentLeaders is sorted descending, add the scores to a stack
+	for _, v := range currentLeaders {
+		// if the score already exists in the stack, skip it
+		// the stack will hold only unique scores
+		// bottom of stack -> highest score
+		// top of stack -> lowest score
+		if v == stack.value {
+			continue
 		}
+		push(v)
 	}
 
-	myScoresRanking := make([]int, len(myScores))
+	// compare myScores with the scores in the stack
+	// myScores is sorted ascending, and the comparison begins with the top
+	// of the stack which holds the lowest leaderboard score
+	myRanking := make([]int, len(myScores))
 
-	for i, myScore := range myScores {
-		highestScore := currentLeaders[0]
-		lowestScore := currentLeaders[len(currentLeaders)-1]
+	for i := 0; i <= len(myScores)-1; {
+		switch {
+		case myScores[i] < stack.value:
+			myRanking[i] = stackSize + 1
+			i++
 
-		if myScore > highestScore {
-			myScoresRanking[i] = 1
-		} else if myScore < lowestScore {
-			myScoresRanking[i] = currentLeadersRanking[len(currentLeadersRanking)-1] + 1
-		} else {
-			myScoreIndex := binarySearch(currentLeaders, myScore)
-			myScoresRanking[i] = currentLeadersRanking[myScoreIndex]
+		case myScores[i] == stack.value:
+			myRanking[i] = stackSize
+			i++
+
+		case myScores[i] > stack.value:
+			for myScores[i] > stack.value {
+				_, hasItems := pop()
+				if hasItems == false {
+					myScores[i] = 1
+					break
+				}
+			}
 		}
 	}
-	return myScoresRanking
+	return myRanking
 }
 
 func main() {
@@ -64,4 +91,5 @@ func main() {
 
 	personalRanking := ladderRanking(leaders, personalScores)
 	fmt.Println("My ranking is:", personalRanking)
+	fmt.Println(stackSize)
 }
