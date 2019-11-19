@@ -25,7 +25,7 @@ This solution first retrieves the ranking of the current leaderbord scores, and 
 Some unit tests are added to ensure the functionality of the function.
 
 3. **Bonus2 Branch:**
-The problem is solved using binary search for each of MyScores, thus reducing the complexity to O(n + nlogn).
+The problem is solved using a stack data structure, thus reducing the time complexity to O(2n).
 
 4. **Bonus3 Branch:**
 The function is re-written, to cover the case where both input slices are unordered.
