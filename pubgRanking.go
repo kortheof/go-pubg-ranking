@@ -4,9 +4,24 @@ import (
 	"fmt"
 )
 
-func binarySearch(pointer []int, number int) int {
-	// Recursive function ??
-	return 6
+func binarySearch(leaderScores []int, myScore int) int {
+
+	lowIndex := 0
+	highIndex := len(leaderScores) - 1
+
+	median := (lowIndex + highIndex) / 2
+
+	if myScore == leaderScores[median] {
+		return median
+	} else if myScore > leaderScores[median] {
+		return 1
+	} else {
+		return 2
+	}
+
+	// for lowIndex <= highIndex {
+	// 	median := (lowIndex + highIndex) / 2
+	// }
 }
 
 // ladderRanking receives as input the current Leaders' scores, as well as my personal scores
@@ -29,7 +44,7 @@ func ladderRanking(currentLeaders []int, myScores []int) []int {
 	for i, myScore := range myScores {
 		highestScore := currentLeaders[0]
 		lowestScore := currentLeaders[len(currentLeaders)-1]
-		
+
 		if myScore > highestScore {
 			myScoresRanking[i] = 1
 		} else if myScore < lowestScore {
@@ -40,22 +55,6 @@ func ladderRanking(currentLeaders []int, myScores []int) []int {
 		}
 	}
 	return myScoresRanking
-	// for index, myScore := range myScores {
-	// 	// TODO: Replace with switch
-	// 	highestScore := currentLeaders[0]
-	// 	lowestScore := currentLeaders[len(currentLeaders)-1]
-	// 	if myScore >= highestScore {
-	// 		myRanking[index] = 1
-	// 	} else if myScore == lowestScore {
-	// 		myRanking[index] = uniqueScores[myScore]
-	// 	} else if myScore < lowestScore {
-	// 		myRanking[index] = uniqueScores[lowestScore] + 1
-	// 	} else {
-	// 		myRanking[index] = binarySearch(&currentLeaders, myScore)
-	// 	}
-
-	// }
-	// return myRanking
 }
 
 func main() {
