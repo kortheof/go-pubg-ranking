@@ -75,7 +75,8 @@ func ladderRanking(currentLeaders []int, myScores []int) []int {
 			for myScores[i] > stack.value {
 				_, hasItems := pop()
 				if hasItems == false {
-					myScores[i] = 1
+					myRanking[i] = 1
+					i++
 					break
 				}
 			}
