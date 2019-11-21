@@ -63,6 +63,11 @@ func ladderRanking(currentLeaders []int, myScores []int) []int {
 
 	for i := 0; i <= len(myScores)-1; {
 		switch {
+		// The stack is empty, so my ranking is definitely 1
+		case stack == nil:
+			myRanking[i] = 1
+			i++
+
 		case myScores[i] < stack.value:
 			myRanking[i] = stackSize + 1
 			i++
@@ -74,7 +79,9 @@ func ladderRanking(currentLeaders []int, myScores []int) []int {
 		case myScores[i] > stack.value:
 			for myScores[i] > stack.value {
 				_, hasItems := pop()
-				if hasItems == false {
+				print(hasItems)
+				// if hasItems == false {
+				if stackSize == 0 {
 					myRanking[i] = 1
 					i++
 					break
@@ -87,7 +94,7 @@ func ladderRanking(currentLeaders []int, myScores []int) []int {
 
 func main() {
 	leaders := []int{110, 110, 80, 60, 60, 30, 25}
-	personalScores := []int{3, 25, 50, 80, 90, 110, 120}
+	personalScores := []int{3, 25, 50, 80, 90, 110, 120, 130}
 	// personalScores := []int{3}
 
 	personalRanking := ladderRanking(leaders, personalScores)
